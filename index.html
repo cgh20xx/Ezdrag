@@ -8,17 +8,38 @@
         body {
             background: #ffd;
         }
-        canvas {
-            outline: 1px solid black;
+        #box {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            width: 100px;
+            height: 100px;
+            background: #6c6;
         }
     </style>
     <script src="src/observer.js"></script>
     <script src="src/ezdrag.js"></script>
 </head>
 <body>
-
+    <div id="box"></div>
     <script>
+        var box = new Ezdrag('#box');
+        console.log(box);
 
+        function dragstart(e) {
+            console.log('start');
+        }
+        function dragmove(e) {
+            console.log('move');
+            console.log(e.dx, e.dx);
+            console.log(e.dragX, e.dragY);
+        }
+        function dragend(e) {
+            console.log('end');
+        }
+        box.on('drag.start', dragstart);
+        box.on('drag.move', dragmove);
+        box.on('drag.end', dragend);
     </script>
 </body>
 </html>
