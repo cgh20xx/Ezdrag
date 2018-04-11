@@ -6,12 +6,18 @@
     <title>Ezdrag.js</title>
     <style>
         body {
-            background: #ffd;
+            /*background: #ffd;*/
         }
-        #box {
-            position: absolute;
-            left: 20px;
-            top: 20px;
+        #container {
+            position: relative;
+            width: 300px;
+            height: 400px;
+            background: #ddd;
+        }
+        .box {
+            position: relative;
+            left: 0;
+            top: 0;
             width: 100px;
             height: 100px;
             background: #6c6;
@@ -21,9 +27,14 @@
     <script src="src/ezdrag.js"></script>
 </head>
 <body>
-    <div id="box"></div>
+    <div id="container">
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+    
     <script>
-        var box = new Ezdrag('#box');
+        var box = new Ezdrag('#container', '.box');
         console.log(box);
 
         function dragstart(e) {
@@ -31,8 +42,12 @@
         }
         function dragmove(e) {
             console.log('move');
-            console.log(e.dx, e.dx);
-            console.log(e.dragX, e.dragY);
+            console.log(e);
+            // console.log(e.dx, e.dx);
+            // console.log(e.dragX, e.dragY);
+            var item = e.target;
+            item.style.left = e.dragX + 'px';
+            item.style.top = e.dragY + 'px';
         }
         function dragend(e) {
             console.log('end');
@@ -40,6 +55,7 @@
         box.on('drag.start', dragstart);
         box.on('drag.move', dragmove);
         box.on('drag.end', dragend);
+
     </script>
 </body>
 </html>
