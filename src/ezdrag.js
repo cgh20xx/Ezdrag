@@ -2,9 +2,9 @@
  *  ezdrag.js
  *
  *  Author : Hank Hsiao
- *  Version: 0.0.2
+ *  Version: 0.0.3
  *  Create : 2018.4.10
- *  Update : 2018.4.11
+ *  Update : 2018.4.12
  *  License: MIT
  */
 
@@ -119,7 +119,10 @@ var Ezdrag = (function(window) {
     Ezdrag.prototype._onUp = function(e) {
         e.preventDefault();
 
-        this.trigger('drag.end');
+        var customEvent = {};
+        customEvent.target = this.currentItem;
+
+        this.trigger('drag.end', customEvent);
         
         this.roots.forEach(function(root, index) {
             root.removeEventListener('mousemove', this._onMove);
